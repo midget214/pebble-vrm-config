@@ -1,31 +1,41 @@
 (function() {
   loadOptions();
+  advancedOptionsToggleHandler();
   submitHandler();
 })();
 
+function advancedOptionsToggleHandler() {
+	var $toggle = $('#tglAdvanced');
+	var $container = $('#dvAdvanced');
+
+	$toggle.on('click', function() {
+		if ($toggle[0].checked) {
+			$container.css('visibility', 'visible');
+			$container.css('height', 'auto');
+		} else {
+			$container.css('visibility', 'hidden');
+			$container.css('height', '0px');
+		}
+	});
+}
+
 function submitHandler() {
-  var $submitButton = $('#submitButton');
+  /*var $submitButton = $('#submitButton');
 
   $submitButton.on('click', function() {
     console.log('Submit');
 
     var return_to = getQueryParam('return_to', 'pebblejs://close#');
     document.location = return_to + encodeURIComponent(JSON.stringify(getAndStoreConfigData()));
-  });
+  });*/
 }
 
 function loadOptions() {
-  var $backgroundColorPicker = $('#backgroundColorPicker');
-  var $timeFormatCheckbox = $('#timeFormatCheckbox');
-
-  if (localStorage.backgroundColor) {
-    $backgroundColorPicker[0].value = localStorage.backgroundColor;
-    $timeFormatCheckbox[0].checked = localStorage.twentyFourHourFormat === 'true';
-  }
+ 
 }
 
 function getAndStoreConfigData() {
-  var $backgroundColorPicker = $('#backgroundColorPicker');
+  /*var $backgroundColorPicker = $('#backgroundColorPicker');
   var $timeFormatCheckbox = $('#timeFormatCheckbox');
 
   var options = {
@@ -37,7 +47,7 @@ function getAndStoreConfigData() {
   localStorage.twentyFourHourFormat = options.twentyFourHourFormat;
 
   console.log('Got options: ' + JSON.stringify(options));
-  return options;
+  return options;*/
 }
 
 function getQueryParam(variable, defaultValue) {

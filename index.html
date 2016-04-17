@@ -8,30 +8,112 @@
 </head>
 <body>
   <div class='item-container'>
-    <h1 class='title'>Watchface<br>Configuration Page</h1>
+    <h1 class='title'>Simple VRM<br>Configuration Page</h1>
   </div>
-
+  
   <div class='item-container'>
+    <div class='item-container-header'>General</div>
     <div class='item-container-content'>
-      <div class='item'>
-        Use this configuration page to choose the settings you would like
-        applied to this app.
-      </div>
-    </div>
-  </div>
-
-  <div class='item-container'>
-    <div class='item-container-header'>Customizability</div>
-    <div class='item-container-content'>
-      <label class='item'>
-        Background Color
-        <input id='backgroundColorPicker' type='text' class='item-color item-color-sunny' value='#000000'>
-      </label>
       <label class='item'>
         24-Hour Format
         <input id='timeFormatCheckbox' type='checkbox' class='item-checkbox' checked>
       </label>
     </div>
+  </div>
+  
+  <div class='item-container'>
+    <div class='item-container-header'>VRM Authentication</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        Username
+		<div class="item-subtitle">Email address used to logon to the Victron VRM Portal</div>
+		<div class="item-input-wrapper">
+            <input type="text" class="item-input" id="username" placeholder="Username">
+          </div>
+      </label>
+     <label class='item'>
+        Password
+		<div class="item-subtitle">Password used to logon to the Victron VRM Portal</div>
+		<div class="item-input-wrapper">
+            <input type="password" class="item-input" id="password" placeholder="Password">
+          </div>
+      </label>
+	  <label class='item'>
+        Site ID
+		<div class="item-subtitle" style="line-height: 110%;">The unique ID of the site you wish to monitor.  This can be found from the Victron VRM Portal URL after logging in (see example below) <br /><br /> 
+		https://vrm.victronenergy.com/site/<b>your site ID</b>?mainTabId=live-feed</div>
+		<div class="item-input-wrapper">
+            <input type="text" class="item-input" id="siteid" placeholder="site id">
+          </div>
+      </label>
+    </div>
+  </div>
+  
+  <div class='item-container'>
+    <div class='item-container-header'>VRM Data Configuration</div>
+	
+	<div class="item-container-content">
+        <label class="item item-subtitle-wrapper">
+          Use advanced config (off by default)
+          <div class="item-subtitle" style="margin-top:15px; line-height: 110%;">For basic setups, leave this option off.  In simple config mode, all values will be taken from the first instance of each device (instance 0)</div>
+          <input type="checkbox" class="item-toggle" id="tglAdvanced">
+      </div>
+	
+	<div id="dvAdvanced" style='visibility:hidden; height:0px;'>
+		<div class='item-container-content'>
+		  <label class='item'>
+			AC Load Instance
+			<div class="item-subtitle" style="line-height: 110%;">For most setups, leave this value as 0.  If multiple inverters are connected to your VRM account, this value can be updated to retrieve the AC load from the relevant instance</div>
+			<div class="item-input-wrapper">
+				<input type="text" class="item-input" id="ac_instance" placeholder="AC Load Instance">
+			</div>
+		  </label>
+		  <label class='item'>
+			AC Load Phase
+			<div class="item-subtitle" style="line-height: 110%;">For most setups, leave this value as L1 (default).  If your system uses 3-phase power, you can select which phase's load to display</div>
+			<label class="item tab-buttons">
+			  <a name="tab-1" class="tab-button active">L1 (default)</a>
+			  <a name="tab-1" class="tab-button">L2</a>
+			  <a name="tab-1" class="tab-button">L3</a>
+			</label>
+		  </label>
+		  <label class='item'>
+			Solar Charger Instance
+			<div class="item-subtitle" style="line-height: 110%;">For most setups, leave this value as 0.  If multiple solar chargers are connected to your VRM account, this value can be updated to retrieve the Solar Yield from the relevant instance</div>
+			<div class="item-input-wrapper">
+				<input type="text" class="item-input" id="sc_instance" placeholder="Solar Charger Instance">
+			</div>
+		  </label>
+		  <label class='item'>
+			Baterry Monitor Instance
+			<div class="item-subtitle" style="line-height: 110%;">For most setups, leave this value as 0.  If multiple BMVs are connected to your VRM account, this value can be updated to retrieve the SoC / Time to Go from the relevant instance</div>
+			<div class="item-input-wrapper">
+				<input type="text" class="item-input" id="bmv_instance" placeholder="Baterry Monitor Instance">
+			</div>
+		  </label>
+		</div>
+	</div>
+	
+	<div class='item-container'>
+		<div class='item-container-header'>Data Retrieval & Cache Settings</div>
+		<div class='item-container-content'>
+		  <label class='item'>
+			Data Refresh Interval (minutes)
+			<div class="item-subtitle" style="line-height: 110%;">The frequency values should be retrieved and updated.  Default every 30 minutes</div>
+			<div class="item-input-wrapper">
+				<input type="text" class="item-input" id="data_refresh" placeholder="Data Refresh Interval">
+			</div>
+		  </label>
+		   <label class='item'>
+			Cache Lifetime (minutes)
+			<div class="item-subtitle" style="line-height: 110%;">The lifetime of cached values.  Once the lifetime expires, values will be updated if possible.  If you wish to never cache any values, use 0 (note that doing this might incur additional data costs and reduced battery time do to more API invocations).  Default 120 minutes (2 hours)</div>
+			<div class="item-input-wrapper">
+				<input type="text" class="item-input" id="cache_expiry" placeholder="Cache Lifetime">
+			</div>
+		  </label>
+		</div>
+	  </div>
+	
     <div class='item-container-footer'>
       These settings only change on the watch after you click save.
     </div>
